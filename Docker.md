@@ -14,4 +14,11 @@ As a part of building the images we have created a container based on a slimmed 
 
 Normally in order to create a new Rails application we might just type `rails new` into our terminal but as our development environment is containerised we need to instead perform these commands from the console of our Debian container. In order to access this console we will type `docker-compose run --rm runner` which asks Docker Compose to run the runner service inside of a throwaway container that will automatically remove itself when we are done with it.
 
-You will then be presented with a regular terminal just like you are used to and from where we can run all of our commands that we might do as a part of the development lifecycle. From here we will run `rails new YourApplicationName --database=postgresql --skip-test --webpack=stimulus`
+You will then be presented with a regular terminal just like you are used to and from where we can run all of our commands that we might do as a part of the development lifecycle. From here we will run `rails new TestManager --database=postgresql -m https://raw.githubusercontent.com/dropbear-software/rails-template/master/master/template.rb`
+
+## Performing Day To Day Tasks
+### Docker Image Versioning
+Everytime you change the `Dockerfile` contents you **must** increase the version number in the `docker-compose.yml` file using the following rules:
+- Increase the patch version if a bug has been fixed
+- Increase the minor version if a dependency has been added or upgraded (e.g a new Ruby version)
+- Increase the major version only if the app stack has changed drastically (e.g. switched from fullstack to API application)
